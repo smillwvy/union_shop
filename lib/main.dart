@@ -171,15 +171,13 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                          ),
+                          image: AssetImage('assets/images/header.png'),
                           fit: BoxFit.cover,
                         ),
                       ),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
+                          color: Colors.black.withValues(alpha: 0.4),
                         ),
                       ),
                     ),
@@ -260,26 +258,22 @@ class HomeScreen extends StatelessWidget {
                         ProductCard(
                           title: 'Limited Edition Essential Zip Hoodies',
                           price: '£14.99',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/essential_hoodie.png',
                         ),
                         ProductCard(
                           title: 'Essential T-Shirt',
-                          price: '£6.99',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          price: '£16.99',
+                          imageUrl: 'assets/images/essential_tshirt.png',
                         ),
                         ProductCard(
                           title: 'Signature Hoodie',
                           price: '£32.99',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/signature_hoodie.png',
                         ),
                         ProductCard(
                           title: 'Signature T-Shirt',
                           price: '£14.99',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/signature_tshirt.png',
                         ),
                       ],
                     ),
@@ -306,8 +300,15 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   const Text(
+                    '❄️ Winter Break Closure Dates ❄️\n'
+                    'Closing 4pm 19/12/2025\n'
+                    'Reopening 10am 06/01/2026\n\n'
+                    'Last post date: 12pm on 18/12/2025\n\n'
+
+                    '--------------------------------------------------------------------------\n\n'
+
                     'Monday - Friday: 10am - 4pm\n'
-                    'Outside term time/Consolidation Weeks: Monday - Friday: 10am - 3pm\n'
+                    'Outside term time: Monday - Friday: 10am - 3pm\n'
                     'Purchase online 24/7',
                     style: TextStyle(fontSize: 14),
                   ),
@@ -333,19 +334,28 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Email address',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  SizedBox(
-                    width: 200,
-                    child: ElevatedButton(
-                      onPressed: () {                      },
-                      child: const Text('Subscribe'),
-                    ),
+                  Row(
+                    children: [
+                      const Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Email address',
+                            border: OutlineInputBorder(),
+                            isDense: true,
+                            contentPadding:
+                                EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      SizedBox(
+                        height: 42,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Text('Subscribe'),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 24),
                   const Text(
@@ -387,7 +397,7 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Image.network(
+            child: Image.asset(
               imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
