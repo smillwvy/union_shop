@@ -22,15 +22,13 @@ class PageLayout extends StatelessWidget {
 }
 
 Widget buildHeader(BuildContext context) {
-  void navigateToHome() {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  void navigateTo(String route, {bool clear = false}) {
+    if (clear) {
+      Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
+    } else {
+      Navigator.pushNamed(context, route);
+    }
   }
-
-  void navigateToAbout() {
-    Navigator.pushNamed(context, '/about');
-  }
-
-  void placeholderCallbackForButtons() {}
 
   return Container(
     height: 100,
@@ -55,7 +53,7 @@ Widget buildHeader(BuildContext context) {
               children: [
                 // Logo link to home
                 GestureDetector(
-                  onTap: navigateToHome,
+                  onTap: () => navigateTo('/', clear: true),
                   child: Image.network(
                     'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                     height: 18,
@@ -74,19 +72,70 @@ Widget buildHeader(BuildContext context) {
                   ),
                 ),
                 const Spacer(),
-                // About link
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: TextButton(
-                    onPressed: navigateToAbout,
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.grey[700],
-                      textStyle: const TextStyle(
-                        fontSize: 14,
-                        decoration: TextDecoration.underline,
+                // Nav links + dropdown
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      TextButton(
+                        onPressed: () => navigateTo('/', clear: true),
+                        child: const Text('Home'),
                       ),
-                    ),
-                    child: const Text('About'),
+                      TextButton(
+                        onPressed: () => navigateTo('/sale'),
+                        child: const Text('Sale'),
+                      ),
+                      PopupMenuButton<String>(
+                        onSelected: (value) => navigateTo(value),
+                        itemBuilder: (context) => const [
+                          PopupMenuItem(
+                            value: '/clothing',
+                            child: Text('Clothing'),
+                          ),
+                          PopupMenuItem(
+                            value: '/merch',
+                            child: Text('Merch'),
+                          ),
+                          PopupMenuItem(
+                            value: '/halloween',
+                            child: Text('Halloween'),
+                          ),
+                          PopupMenuItem(
+                            value: '/sig-essential',
+                            child: Text('Signature Essential'),
+                          ),
+                          PopupMenuItem(
+                            value: '/city-collection',
+                            child: Text('City Collection'),
+                          ),
+                          PopupMenuItem(
+                            value: '/pride',
+                            child: Text('Pride'),
+                          ),
+                          PopupMenuItem(
+                            value: '/graduation',
+                            child: Text('Graduation'),
+                          ),
+                          PopupMenuItem(
+                            value: '/print-about',
+                            child: Text('Print About'),
+                          ),
+                          PopupMenuItem(
+                            value: '/personalisation',
+                            child: Text('Personalisation'),
+                          ),
+                        ],
+                        child: const Text('Shop ▾'),
+                      ),
+                      TextButton(
+                        onPressed: () => navigateTo('/about'),
+                        child: const Text('About'),
+                      ),
+                      TextButton(
+                        onPressed: () => navigateTo('/product'),
+                        child: const Text('Product'),
+                      ),
+                    ],
                   ),
                 ),
                 ConstrainedBox(
@@ -106,7 +155,7 @@ Widget buildHeader(BuildContext context) {
                           minWidth: 32,
                           minHeight: 32,
                         ),
-                        onPressed: placeholderCallbackForButtons,
+                        onPressed: () {},
                       ),
                       IconButton(
                         icon: const Icon(
@@ -119,7 +168,7 @@ Widget buildHeader(BuildContext context) {
                           minWidth: 32,
                           minHeight: 32,
                         ),
-                        onPressed: placeholderCallbackForButtons,
+                        onPressed: () {},
                       ),
                       IconButton(
                         icon: const Icon(
@@ -132,7 +181,7 @@ Widget buildHeader(BuildContext context) {
                           minWidth: 32,
                           minHeight: 32,
                         ),
-                        onPressed: placeholderCallbackForButtons,
+                        onPressed: () {},
                       ),
                       IconButton(
                         icon: const Icon(
@@ -145,7 +194,7 @@ Widget buildHeader(BuildContext context) {
                           minWidth: 32,
                           minHeight: 32,
                         ),
-                        onPressed: placeholderCallbackForButtons,
+                        onPressed: () {},
                       ),
                     ],
                   ),

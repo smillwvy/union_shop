@@ -23,7 +23,41 @@ class UnionShopApp extends StatelessWidget {
         '/': (context) => const HomePage(),
         '/about': (context) => const AboutPage(),
         '/product': (context) => const ProductPage(),
+        '/sale': (context) => const SimplePage(title: 'Sale'),
+        '/clothing': (context) => const SimplePage(title: 'Clothing'),
+        '/merch': (context) => const SimplePage(title: 'Merch'),
+        '/halloween': (context) => const SimplePage(title: 'Halloween'),
+        '/sig-essential': (context) =>
+            const SimplePage(title: 'Signature Essential'),
+        '/city-collection': (context) =>
+            const SimplePage(title: 'City Collection'),
+        '/pride': (context) => const SimplePage(title: 'Pride'),
+        '/graduation': (context) => const SimplePage(title: 'Graduation'),
+        '/print-about': (context) => const SimplePage(title: 'Print About'),
+        '/personalisation': (context) =>
+            const SimplePage(title: 'Personalisation'),
       },
+    );
+  }
+}
+
+class SimplePage extends StatelessWidget {
+  final String title;
+
+  const SimplePage({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: Center(
+        child: Text(
+          title,
+          style: const TextStyle(fontSize: 20),
+        ),
+      ),
     );
   }
 }
