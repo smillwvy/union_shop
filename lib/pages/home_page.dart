@@ -88,42 +88,80 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.all(40.0),
               child: Column(
                 children: [
-                  const Text(
-                    'ESSENTIALS RANGE - OVER 20% OFF!',
+                  Text(
+                    'ESSENTIAL RANGE - OVER 20% OFF!',
                     style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      letterSpacing: 1,
+                      fontSize: 18,
+                      letterSpacing: 2,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[800],
                     ),
                   ),
-                  const SizedBox(height: 48),
+                  const SizedBox(height: 40),
                   GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount:
                         MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                    crossAxisSpacing: 24,
-                    mainAxisSpacing: 48,
+                    childAspectRatio:
+                        MediaQuery.of(context).size.width > 600 ? 0.82 : 0.88,
+                    crossAxisSpacing: 32,
+                    mainAxisSpacing: 40,
                     children: const [
-                      ProductCard(
-                        title: 'Limited Edition Essential Zip Hoodies',
-                        price: '£14.99',
-                        imageUrl: 'assets/images/essential_hoodie.png',
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: ProductCard(
+                          title: 'Limited Edition Essential Zip Hoodies',
+                          price: '£14.99',
+                          imageUrl: 'assets/images/essential_hoodie.png',
+                        ),
                       ),
-                      ProductCard(
-                        title: 'Essential T-Shirt',
-                        price: '£16.99',
-                        imageUrl: 'assets/images/essential_tshirt.png',
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: ProductCard(
+                          title: 'Essential T-Shirt',
+                          price: '£16.99',
+                          imageUrl: 'assets/images/essential_tshirt.png',
+                        ),
                       ),
-                      ProductCard(
-                        title: 'Signature Hoodie',
-                        price: '£32.99',
-                        imageUrl: 'assets/images/signature_hoodie.png',
+                    ],
+                  ),
+                  const SizedBox(height: 80),
+                  Text(
+                    'SIGNATURE RANGE',
+                    style: TextStyle(
+                      fontSize: 18,
+                      letterSpacing: 2,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                  GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount:
+                        MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                    childAspectRatio:
+                        MediaQuery.of(context).size.width > 600 ? 0.82 : 0.88,
+                    crossAxisSpacing: 32,
+                    mainAxisSpacing: 40,
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: ProductCard(
+                          title: 'Signature Hoodie',
+                          price: '£32.99',
+                          imageUrl: 'assets/images/signature_hoodie.png',
+                        ),
                       ),
-                      ProductCard(
-                        title: 'Signature T-Shirt',
-                        price: '£14.99',
-                        imageUrl: 'assets/images/signature_tshirt.png',
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: ProductCard(
+                          title: 'Signature T-Shirt',
+                          price: '£14.99',
+                          imageUrl: 'assets/images/signature_tshirt.png',
+                        ),
                       ),
                     ],
                   ),

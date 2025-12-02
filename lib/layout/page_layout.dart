@@ -11,10 +11,8 @@ class PageLayout extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Shared header
             buildHeader(context),
             child,
-            // Shared footer
             buildFooter(context),
           ],
         ),
