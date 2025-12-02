@@ -82,6 +82,10 @@ Widget buildHeader(BuildContext context) {
                         child: const Text('Home'),
                       ),
                       TextButton(
+                        onPressed: () => navigateTo('/collections'),
+                        child: const Text('Collections'),
+                      ),
+                      TextButton(
                         onPressed: () => navigateTo('/sale'),
                         child: const Text('Sale'),
                       ),
