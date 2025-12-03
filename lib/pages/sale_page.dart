@@ -116,12 +116,12 @@ class _SaleProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(12),
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(context, '/product'),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: AspectRatio(
@@ -144,58 +144,58 @@ class _SaleProductCard extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                product['name'] ?? '',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey[900],
-                  height: 1.3,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Row(
-                children: [
-                  Text(
-                    product['oldPrice'] ?? '',
-                    style: TextStyle(
-                      decoration: TextDecoration.lineThrough,
-                      color: Colors.grey[500],
-                      fontSize: 13,
-                    ),
+          const SizedBox(height: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product['name'] ?? '',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[900],
+                    height: 1.3,
                   ),
-                  const SizedBox(width: 8),
-                  Text(
-                    product['newPrice'] ?? '',
-                    style: const TextStyle(
-                      color: Color(0xFF4d2963),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'Limited time offer',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey[600],
                 ),
-              ),
-            ],
+                const SizedBox(height: 6),
+                Row(
+                  children: [
+                    Text(
+                      product['oldPrice'] ?? '',
+                      style: TextStyle(
+                        decoration: TextDecoration.lineThrough,
+                        color: Colors.grey[500],
+                        fontSize: 13,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Text(
+                      product['newPrice'] ?? '',
+                      style: const TextStyle(
+                        color: Color(0xFF4d2963),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Limited time offer',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
