@@ -47,20 +47,31 @@ class SalePage extends StatelessWidget {
                 color: Colors.grey.shade100,
                 padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
                 child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Sale Items — Up to 20% OFF!',
+                      'SALE',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 32,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     SizedBox(height: 8),
                     Text(
-                      'Grab discounted favourites while stocks last. Limited quantities available.',
+                      "Don't miss out! Get yours before they're all gone!",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      'All prices shown are inclusive of the discount 🛒',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 13,
                         color: Colors.black54,
                       ),
                     ),
