@@ -35,40 +35,54 @@ const List<Map<String, String>> _products = [
   },
 ];
 
-class CollectionsPage extends StatelessWidget {
+class CollectionsPage extends StatefulWidget {
   const CollectionsPage({super.key});
+
+  @override
+  State<CollectionsPage> createState() => _CollectionsPageState();
+}
+
+class _CollectionsPageState extends State<CollectionsPage> {
+  String _selectedFilter = 'All products';
+  String _selectedSort = 'Featured';
 
   @override
   Widget build(BuildContext context) {
     return PageLayout(
       child: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewPadding.bottom + 100),
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewPadding.bottom + 100,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+                padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
                 color: Colors.grey.shade100,
-                child: const Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      'Clothing',
+                    const Text(
+                      'Winter Favourites',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 32,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8),
-                    Text(
-                      'Browse our curated categories and find your next favourite piece.',
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Shop all of this season\'s must haves in one place.',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.black54,
                       ),
                     ),
+                    const SizedBox(height: 16),
+                    _buildFilterSortBar(),
                   ],
                 ),
               ),
@@ -104,6 +118,101 @@ class CollectionsPage extends StatelessWidget {
                         .toList(),
                   );
                 }),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFilterSortBar() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 4),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Colors.grey.shade400, width: 1),
+          bottom: BorderSide(color: Colors.grey.shade400, width: 1),
+        ),
+      ),
+      child: Row(
+        children: [
+          _buildDropdownSection(
+            label: 'FILTER BY',
+            value: _selectedFilter,
+            options: const ['All products', 'Hoodies', 'T-Shirts'],
+            onChanged: (value) {
+              if (value == null) return;
+              setState(() {
+                _selectedFilter = value;
+              });
+            },
+          ),
+          const SizedBox(width: 12),
+          _buildDropdownSection(
+            label: 'SORT BY',
+            value: _selectedSort,
+            options: const ['Featured', 'Price: low to high', 'Price: high to low'],
+            onChanged: (value) {
+              if (value == null) return;
+              setState(() {
+                _selectedSort = value;
+              });
+            },
+          ),
+          const SizedBox(width: 12),
+          Text(
+            '6 products',
+            style: TextStyle(
+              fontSize: 13,
+              color: Colors.grey[800],
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDropdownSection({
+    required String label,
+    required String value,
+    required List<String> options,
+    required ValueChanged<String?> onChanged,
+  }) {
+    return Expanded(
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: IntrinsicWidth(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                label,
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.5,
+                ),
+              ),
+              const SizedBox(width: 8),
+              SizedBox(
+                width: 170,
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    isExpanded: true,
+                    value: value,
+                    items: options
+                        .map(
+                          (option) => DropdownMenuItem(
+                            value: option,
+                            child: Text(option),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: onChanged,
+                  ),
+                ),
               ),
             ],
           ),
