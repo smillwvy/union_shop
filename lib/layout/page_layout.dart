@@ -231,7 +231,7 @@ Widget buildFooter(BuildContext context) {
         ),
         const SizedBox(height: 8),
         const Text(
-          '❄️ Winter Break Closure Dates ❄️\n'
+          'Winter Break Closure Dates\n'
           'Closing 4pm 19/12/2025\n'
           'Reopening 10am 06/01/2026\n\n'
           'Last post date: 12pm on 18/12/2025\n\n'
