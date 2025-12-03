@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/layout/page_layout.dart';
+import 'package:union_shop/models/cart.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -157,6 +158,13 @@ class _ProductPageState extends State<ProductPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
+                        cart.addItem(
+                          id: 'hoodie-001',
+                          title: 'Limited Edition Essential Zip Hoodie',
+                          price: 14.99,
+                          imageUrl: 'assets/images/essential_hoodie.png',
+                          quantity: _quantity,
+                        );
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Added to cart'),
