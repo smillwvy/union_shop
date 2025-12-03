@@ -183,7 +183,7 @@ Widget buildHeader(BuildContext context) {
                     minWidth: 32,
                     minHeight: 32,
                   ),
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(context, '/cart'),
                 ),
                 IconButton(
                   icon: const Icon(
