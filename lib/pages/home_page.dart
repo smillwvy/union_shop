@@ -41,19 +41,23 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const Text(
-                        'The Print Shack',
+                        'Essential Range - Over\n20% OFF!',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 32,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
+                          letterSpacing: 2,
                           color: Colors.white,
                           height: 1.2,
                         ),
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        "Lets create something uniquely you with our personalisation service - From £3 for one line of text!",
+                        'Over 20% off our Essential Range. Come and grab yours while stock lasts!',
                         style: TextStyle(
-                          fontSize: 20,
+                          fontSize: 16,
+                          letterSpacing: 0.8,
+                          fontWeight: FontWeight.w600,
                           color: Colors.white,
                           height: 1.5,
                         ),
@@ -70,7 +74,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         child: const Text(
-                          'FIND OUT MORE',
+                          'Browse Collection',
                           style: TextStyle(fontSize: 14, letterSpacing: 1),
                         ),
                       ),
