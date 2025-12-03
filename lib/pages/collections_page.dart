@@ -135,41 +135,44 @@ class _CollectionsPageState extends State<CollectionsPage> {
           bottom: BorderSide(color: Colors.grey.shade400, width: 1),
         ),
       ),
-      child: Row(
-        children: [
-          _buildDropdownSection(
-            label: 'FILTER BY',
-            value: _selectedFilter,
-            options: const ['All products', 'Hoodies', 'T-Shirts'],
-            onChanged: (value) {
-              if (value == null) return;
-              setState(() {
-                _selectedFilter = value;
-              });
-            },
-          ),
-          const SizedBox(width: 12),
-          _buildDropdownSection(
-            label: 'SORT BY',
-            value: _selectedSort,
-            options: const ['Featured', 'Price: low to high', 'Price: high to low'],
-            onChanged: (value) {
-              if (value == null) return;
-              setState(() {
-                _selectedSort = value;
-              });
-            },
-          ),
-          const SizedBox(width: 12),
-          Text(
-            '6 products',
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.grey[800],
-              fontWeight: FontWeight.w600,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            _buildDropdownSection(
+              label: 'FILTER BY',
+              value: _selectedFilter,
+              options: const ['All products', 'Hoodies', 'T-Shirts'],
+              onChanged: (value) {
+                if (value == null) return;
+                setState(() {
+                  _selectedFilter = value;
+                });
+              },
             ),
-          ),
-        ],
+            const SizedBox(width: 12),
+            _buildDropdownSection(
+              label: 'SORT BY',
+              value: _selectedSort,
+              options: const ['Featured', 'Price: low to high', 'Price: high to low'],
+              onChanged: (value) {
+                if (value == null) return;
+                setState(() {
+                  _selectedSort = value;
+                });
+              },
+            ),
+            const SizedBox(width: 12),
+            Text(
+              '6 products',
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey[800],
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -180,44 +183,37 @@ class _CollectionsPageState extends State<CollectionsPage> {
     required List<String> options,
     required ValueChanged<String?> onChanged,
   }) {
-    return Expanded(
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: IntrinsicWidth(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                label,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.5,
-                ),
-              ),
-              const SizedBox(width: 8),
-              SizedBox(
-                width: 170,
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                    isExpanded: true,
-                    value: value,
-                    items: options
-                        .map(
-                          (option) => DropdownMenuItem(
-                            value: option,
-                            child: Text(option),
-                          ),
-                        )
-                        .toList(),
-                    onChanged: onChanged,
-                  ),
-                ),
-              ),
-            ],
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.5,
           ),
         ),
-      ),
+        const SizedBox(width: 8),
+        SizedBox(
+          width: 170,
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: value,
+              items: options
+                  .map(
+                    (option) => DropdownMenuItem(
+                      value: option,
+                      child: Text(option),
+                    ),
+                  )
+                  .toList(),
+              onChanged: onChanged,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

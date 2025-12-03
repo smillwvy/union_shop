@@ -70,106 +70,104 @@ class _CollectionPageState extends State<CollectionPage> {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: Colors.grey.shade300),
       ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                const Text(
-                  'FILTER BY',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.5,
-                  ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            _buildDropdown(
+              label: 'FILTER BY',
+              value: _selectedFilter,
+              items: const [
+                DropdownMenuItem(
+                  value: 'All products',
+                  child: Text('All products'),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      isExpanded: true,
-                      value: _selectedFilter,
-                      items: const [
-                        DropdownMenuItem(
-                          value: 'All products',
-                          child: Text('All products'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Hoodies',
-                          child: Text('Hoodies'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'T-Shirts',
-                          child: Text('T-Shirts'),
-                        ),
-                      ],
-                      onChanged: (value) {
-                        if (value == null) return;
-                        setState(() {
-                          _selectedFilter = value;
-                        });
-                      },
-                    ),
-                  ),
+                DropdownMenuItem(
+                  value: 'Hoodies',
+                  child: Text('Hoodies'),
+                ),
+                DropdownMenuItem(
+                  value: 'T-Shirts',
+                  child: Text('T-Shirts'),
                 ),
               ],
+              onChanged: (value) {
+                if (value == null) return;
+                setState(() {
+                  _selectedFilter = value;
+                });
+              },
             ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Row(
-              children: [
-                const Text(
-                  'SORT BY',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.5,
-                  ),
+            const SizedBox(width: 12),
+            _buildDropdown(
+              label: 'SORT BY',
+              value: _selectedSort,
+              items: const [
+                DropdownMenuItem(
+                  value: 'Featured',
+                  child: Text('Featured'),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      isExpanded: true,
-                      value: _selectedSort,
-                      items: const [
-                        DropdownMenuItem(
-                          value: 'Featured',
-                          child: Text('Featured'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Price: low to high',
-                          child: Text('Price: low to high'),
-                        ),
-                        DropdownMenuItem(
-                          value: 'Price: high to low',
-                          child: Text('Price: high to low'),
-                        ),
-                      ],
-                      onChanged: (value) {
-                        if (value == null) return;
-                        setState(() {
-                          _selectedSort = value;
-                        });
-                      },
-                    ),
-                  ),
+                DropdownMenuItem(
+                  value: 'Price: low to high',
+                  child: Text('Price: low to high'),
+                ),
+                DropdownMenuItem(
+                  value: 'Price: high to low',
+                  child: Text('Price: high to low'),
                 ),
               ],
+              onChanged: (value) {
+                if (value == null) return;
+                setState(() {
+                  _selectedSort = value;
+                });
+              },
             ),
-          ),
-          const SizedBox(width: 12),
-          Text(
-            '6 products',
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.grey[800],
-              fontWeight: FontWeight.w600,
+            const SizedBox(width: 12),
+            Text(
+              '6 products',
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey[800],
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildDropdown({
+    required String label,
+    required String value,
+    required List<DropdownMenuItem<String>> items,
+    required ValueChanged<String?> onChanged,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.5,
+          ),
+        ),
+        const SizedBox(width: 8),
+        SizedBox(
+          width: 170,
+          child: DropdownButtonHideUnderline(
+            child: DropdownButton<String>(
+              isExpanded: true,
+              value: value,
+              items: items,
+              onChanged: onChanged,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
