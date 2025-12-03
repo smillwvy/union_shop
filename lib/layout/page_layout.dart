@@ -31,9 +31,9 @@ Widget buildHeader(BuildContext context) {
   }
 
   return Container(
-    height: 100,
     color: Colors.white,
     child: Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         // Top banner
         Container(
@@ -46,10 +46,13 @@ Widget buildHeader(BuildContext context) {
             style: TextStyle(color: Colors.white, fontSize: 17),
           ),
         ),
-        Expanded(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+          alignment: Alignment.centerLeft,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Logo link to home
                 GestureDetector(
@@ -71,137 +74,129 @@ Widget buildHeader(BuildContext context) {
                     },
                   ),
                 ),
-                const Spacer(),
-                // Nav links + dropdown
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      TextButton(
-                        onPressed: () => navigateTo('/', clear: true),
-                        child: const Text('Home'),
-                      ),
-                      TextButton(
-                        onPressed: () => navigateTo('/collections'),
-                        child: const Text('Collections'),
-                      ),
-                      TextButton(
-                        onPressed: () => navigateTo('/sale'),
-                        child: const Text('Sale'),
-                      ),
-                      PopupMenuButton<String>(
-                        onSelected: (value) => navigateTo(value),
-                        itemBuilder: (context) => const [
-                          PopupMenuItem(
-                            value: '/clothing',
-                            child: Text('Clothing'),
-                          ),
-                          PopupMenuItem(
-                            value: '/merch',
-                            child: Text('Merch'),
-                          ),
-                          PopupMenuItem(
-                            value: '/halloween',
-                            child: Text('Halloween'),
-                          ),
-                          PopupMenuItem(
-                            value: '/sig-essential',
-                            child: Text('Signature Essential'),
-                          ),
-                          PopupMenuItem(
-                            value: '/city-collection',
-                            child: Text('City Collection'),
-                          ),
-                          PopupMenuItem(
-                            value: '/pride',
-                            child: Text('Pride'),
-                          ),
-                          PopupMenuItem(
-                            value: '/graduation',
-                            child: Text('Graduation'),
-                          ),
-                          PopupMenuItem(
-                            value: '/print-about',
-                            child: Text('Print About'),
-                          ),
-                          PopupMenuItem(
-                            value: '/personalisation',
-                            child: Text('Personalisation'),
-                          ),
-                        ],
-                        child: const Text('Shop ▾'),
-                      ),
-                      TextButton(
-                        onPressed: () => navigateTo('/about'),
-                        child: const Text('About'),
-                      ),
-                      TextButton(
-                        onPressed: () => navigateTo('/product'),
-                        child: const Text('Product'),
-                      ),
-                    ],
-                  ),
+                const SizedBox(width: 12),
+                TextButton(
+                  onPressed: () => navigateTo('/', clear: true),
+                  child: const Text('Home'),
                 ),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 600),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // Header icons
-                      IconButton(
-                        icon: const Icon(
-                          Icons.search,
-                          size: 18,
-                          color: Colors.grey,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        constraints: const BoxConstraints(
-                          minWidth: 32,
-                          minHeight: 32,
-                        ),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.person_outline,
-                          size: 18,
-                          color: Colors.grey,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        constraints: const BoxConstraints(
-                          minWidth: 32,
-                          minHeight: 32,
-                        ),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.shopping_bag_outlined,
-                          size: 18,
-                          color: Colors.grey,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        constraints: const BoxConstraints(
-                          minWidth: 32,
-                          minHeight: 32,
-                        ),
-                        onPressed: () {},
-                      ),
-                      IconButton(
-                        icon: const Icon(
-                          Icons.menu,
-                          size: 18,
-                          color: Colors.grey,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        constraints: const BoxConstraints(
-                          minWidth: 32,
-                          minHeight: 32,
-                        ),
-                        onPressed: () {},
-                      ),
-                    ],
+                TextButton(
+                  onPressed: () => navigateTo('/sale'),
+                  child: const Text('Sale'),
+                ),
+                PopupMenuButton<String>(
+                  onSelected: (value) => navigateTo(value),
+                  itemBuilder: (context) => const [
+                    PopupMenuItem(
+                      value: '/clothing',
+                      child: Text('Clothing'),
+                    ),
+                    PopupMenuItem(
+                      value: '/merch',
+                      child: Text('Merch'),
+                    ),
+                    PopupMenuItem(
+                      value: '/halloween',
+                      child: Text('Halloween'),
+                    ),
+                    PopupMenuItem(
+                      value: '/sig-essential',
+                      child: Text('Signature Essential'),
+                    ),
+                    PopupMenuItem(
+                      value: '/city-collection',
+                      child: Text('City Collection'),
+                    ),
+                    PopupMenuItem(
+                      value: '/pride',
+                      child: Text('Pride'),
+                    ),
+                    PopupMenuItem(
+                      value: '/graduation',
+                      child: Text('Graduation'),
+                    ),
+                    PopupMenuItem(
+                      value: '/print-about',
+                      child: Text('Print About'),
+                    ),
+                    PopupMenuItem(
+                      value: '/personalisation',
+                      child: Text('Personalisation'),
+                    ),
+                  ],
+                  child: const Text('Shop ▾'),
+                ),
+                TextButton(
+                  onPressed: () => navigateTo('/about'),
+                  child: const Text('About'),
+                ),
+                const SizedBox(width: 8),
+                PopupMenuButton<String>(
+                  onSelected: (value) => navigateTo(value),
+                  itemBuilder: (context) => const [
+                    PopupMenuItem(
+                      value: '/print-about',
+                      child: Text('About'),
+                    ),
+                    PopupMenuItem(
+                      value: '/personalisation',
+                      child: Text('Personalisation'),
+                    ),
+                  ],
+                  child: const Text('The Print Shack ▾'),
+                ),
+                const SizedBox(width: 8),
+                // Header icons
+                IconButton(
+                  icon: const Icon(
+                    Icons.search,
+                    size: 18,
+                    color: Colors.grey,
                   ),
+                  padding: const EdgeInsets.all(8),
+                  constraints: const BoxConstraints(
+                    minWidth: 32,
+                    minHeight: 32,
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.person_outline,
+                    size: 18,
+                    color: Colors.grey,
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  constraints: const BoxConstraints(
+                    minWidth: 32,
+                    minHeight: 32,
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.shopping_bag_outlined,
+                    size: 18,
+                    color: Colors.grey,
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  constraints: const BoxConstraints(
+                    minWidth: 32,
+                    minHeight: 32,
+                  ),
+                  onPressed: () {},
+                ),
+                IconButton(
+                  icon: const Icon(
+                    Icons.menu,
+                    size: 18,
+                    color: Colors.grey,
+                  ),
+                  padding: const EdgeInsets.all(8),
+                  constraints: const BoxConstraints(
+                    minWidth: 32,
+                    minHeight: 32,
+                  ),
+                  onPressed: () {},
                 ),
               ],
             ),
