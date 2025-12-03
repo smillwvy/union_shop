@@ -55,7 +55,7 @@ class CollectionsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Collections',
+                      'Clothing',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
