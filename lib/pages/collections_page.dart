@@ -1,53 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/layout/page_layout.dart';
+import 'package:union_shop/widgets/product_card.dart';
 
-class CollectionInfo {
-  final String id;
-  final String name;
-  final String description;
-  final String imageUrl;
-
-  const CollectionInfo({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.imageUrl,
-  });
-}
-
-const List<CollectionInfo> _collections = [
-  CollectionInfo(
-    id: 'clothing',
-    name: 'Clothing',
-    description:
-        'Hoodies, tees, and comfortable basics for campus and beyond.',
-    imageUrl:
-        'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=80',
-  ),
-  CollectionInfo(
-    id: 'merch',
-    name: 'Merchandise',
-    description:
-        'Pins, mugs, and gifts to celebrate your university pride every day.',
-    imageUrl:
-        'https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=900&q=80',
-  ),
-  CollectionInfo(
-    id: 'pride',
-    name: 'Pride Collection',
-    description:
-        'Bold designs inspired by inclusion and community. Wear it loud.',
-    imageUrl:
-        'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80',
-  ),
-  CollectionInfo(
-    id: 'sale',
-    name: 'Sale',
-    description:
-        'Discounted favorites while stock lasts. Grab the best deals now.',
-    imageUrl:
-        'https://images.unsplash.com/photo-1495020689067-958852a7765e?auto=format&fit=crop&w=900&q=80',
-  ),
+const List<Map<String, String>> _products = [
+  {
+    'title': 'Limited Edition Essential Zip Hoodie',
+    'price': '£14.99',
+    'imageUrl': 'assets/images/essential_hoodie.png',
+  },
+  {
+    'title': 'Essential T-Shirt',
+    'price': '£16.99',
+    'imageUrl': 'assets/images/essential_tshirt.png',
+  },
+  {
+    'title': 'Signature Hoodie',
+    'price': '£32.99',
+    'imageUrl': 'assets/images/signature_hoodie.png',
+  },
+  {
+    'title': 'Signature T-Shirt',
+    'price': '£14.99',
+    'imageUrl': 'assets/images/signature_tshirt.png',
+  },
+  {
+    'title': 'Essential Hoodie (Alt)',
+    'price': '£15.99',
+    'imageUrl': 'assets/images/essential_hoodie.png',
+  },
+  {
+    'title': 'Signature Tee (Alt)',
+    'price': '£13.99',
+    'imageUrl': 'assets/images/signature_tshirt.png',
+  },
 ];
 
 class CollectionsPage extends StatelessWidget {
@@ -56,121 +41,72 @@ class CollectionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PageLayout(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 24),
-            color: Colors.grey.shade100,
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Collections',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
+      child: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewPadding.bottom + 100),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
+                color: Colors.grey.shade100,
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Collections',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Browse our curated categories and find your next favourite piece.',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 8),
-                Text(
-                  'Browse our curated categories and find your next favorite piece.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black54,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(24),
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final isWide = constraints.maxWidth > 800;
-                final crossAxisCount = isWide ? 2 : 1;
-                return GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: _collections.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: LayoutBuilder(builder: (context, innerConstraints) {
+                  final width = innerConstraints.maxWidth;
+                  final crossAxisCount = width >= 1000
+                      ? 3
+                      : width >= 700
+                          ? 3
+                          : width >= 500
+                              ? 2
+                              : 1;
+                  final childAspect = width >= 1000 ? 0.8 : 0.9;
+
+                  return GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: crossAxisCount,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
-                    childAspectRatio: isWide ? 1.3 : 0.95,
-                  ),
-                  itemBuilder: (context, index) {
-                    final collection = _collections[index];
-                    return _CollectionCard(collection: collection);
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _CollectionCard extends StatelessWidget {
-  final CollectionInfo collection;
-
-  const _CollectionCard({required this.collection});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: InkWell(
-        onTap: () =>
-            Navigator.pushNamed(context, '/collection', arguments: collection.id),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AspectRatio(
-              aspectRatio: 3 / 2,
-              child: Image.network(
-                collection.imageUrl,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.grey[200],
-                    child: const Center(
-                      child: Icon(Icons.image_not_supported, color: Colors.grey),
-                    ),
+                    childAspectRatio: childAspect,
+                    children: _products
+                        .map((p) => Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              child: ProductCard(
+                                title: p['title'] ?? '',
+                                price: p['price'] ?? '',
+                                imageUrl: p['imageUrl'] ?? '',
+                              ),
+                            ))
+                        .toList(),
                   );
-                },
+                }),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    collection.name,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    collection.description,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.black54,
-                      height: 1.5,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
