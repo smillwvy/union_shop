@@ -24,14 +24,14 @@ const List<Map<String, String>> _products = [
     'imageUrl': 'assets/images/signature_tshirt.png',
   },
   {
-    'title': 'Essential Hoodie (Alt)',
-    'price': '£15.99',
-    'imageUrl': 'assets/images/essential_hoodie.png',
+    'title': 'Classic Hoodie',
+    'price': '£24.99',
+    'imageUrl': 'assets/images/classic_hoodie.png',
   },
   {
-    'title': 'Signature Tee (Alt)',
-    'price': '£13.99',
-    'imageUrl': 'assets/images/signature_tshirt.png',
+    'title': 'Classic Sweatshirt',
+    'price': '£21.99',
+    'imageUrl': 'assets/images/classic_sweatshirt.png',
   },
 ];
 
