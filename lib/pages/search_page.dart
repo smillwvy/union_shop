@@ -85,7 +85,7 @@ class _SearchPageState extends State<SearchPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'SEARCH OUR SITE',
+                'Search our Products',
                 textAlign: TextAlign.center,
                 style: textTheme.headlineMedium?.copyWith(
                   fontWeight: FontWeight.w800,

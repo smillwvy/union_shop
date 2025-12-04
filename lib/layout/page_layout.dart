@@ -8,14 +8,20 @@ class PageLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            buildHeader(context),
-            child,
-            buildFooter(context),
-          ],
-        ),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(child: buildHeader(context)),
+          SliverToBoxAdapter(child: child),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                buildFooter(context),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
