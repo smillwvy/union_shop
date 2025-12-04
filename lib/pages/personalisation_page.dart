@@ -245,7 +245,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
     final itemTitle =
         _isTwoLines ? 'Print personalisation (two lines)' : 'Print personalisation (one line)';
 
-    cart.addItem(
+    addToCart(
       id: itemId,
       title: itemTitle,
       price: _pricePerItem,

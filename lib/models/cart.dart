@@ -1,4 +1,3 @@
-
 class CartItem {
   final String id;
   final String title;
@@ -15,65 +14,62 @@ class CartItem {
   });
 }
 
-class Cart {
-  final List<CartItem> _items = [];
+/// Simple global cart state using top-level helpers.
+final List<CartItem> cartItems = [];
 
-  List<CartItem> get items => List.unmodifiable(_items);
+List<CartItem> getCartItems() => List.unmodifiable(cartItems);
 
-  int get totalItems => _items.length;
+int cartTotalItems() => cartItems.length;
 
-  int get totalQuantity =>
-      _items.fold(0, (sum, item) => sum + item.quantity);
+int cartTotalQuantity() =>
+    cartItems.fold(0, (sum, item) => sum + item.quantity);
 
-  double get totalPrice => _items.fold(
-        0.0,
-        (sum, item) => sum + item.price * item.quantity,
-      );
+double cartTotalPrice() => cartItems.fold(
+      0.0,
+      (sum, item) => sum + item.price * item.quantity,
+    );
 
-  void addItem({
-    required String id,
-    required String title,
-    required double price,
-    required String imageUrl,
-    int quantity = 1,
-  }) {
-    if (quantity < 1) return;
+void addToCart({
+  required String id,
+  required String title,
+  required double price,
+  required String imageUrl,
+  int quantity = 1,
+}) {
+  if (quantity < 1) return;
 
-    final index = _items.indexWhere((item) => item.id == id);
-    if (index >= 0) {
-      _items[index].quantity += quantity;
-    } else {
-      _items.add(
-        CartItem(
-          id: id,
-          title: title,
-          price: price,
-          imageUrl: imageUrl,
-          quantity: quantity,
-        ),
-      );
-    }
-  }
-
-  void removeOne(String id) {
-    final index = _items.indexWhere((item) => item.id == id);
-    if (index == -1) return;
-
-    final item = _items[index];
-    if (item.quantity > 1) {
-      item.quantity -= 1;
-    } else {
-      _items.removeAt(index);
-    }
-  }
-
-  void removeItem(String id) {
-    _items.removeWhere((item) => item.id == id);
-  }
-
-  void clear() {
-    _items.clear();
+  final index = cartItems.indexWhere((item) => item.id == id);
+  if (index >= 0) {
+    cartItems[index].quantity += quantity;
+  } else {
+    cartItems.add(
+      CartItem(
+        id: id,
+        title: title,
+        price: price,
+        imageUrl: imageUrl,
+        quantity: quantity,
+      ),
+    );
   }
 }
 
-final cart = Cart();
+void removeOneFromCart(String id) {
+  final index = cartItems.indexWhere((item) => item.id == id);
+  if (index == -1) return;
+
+  final item = cartItems[index];
+  if (item.quantity > 1) {
+    item.quantity -= 1;
+  } else {
+    cartItems.removeAt(index);
+  }
+}
+
+void removeItemFromCart(String id) {
+  cartItems.removeWhere((item) => item.id == id);
+}
+
+void clearCart() {
+  cartItems.clear();
+}

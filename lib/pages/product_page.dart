@@ -133,7 +133,7 @@ class _ProductPageState extends State<ProductPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        cart.addItem(
+                        addToCart(
                           id: 'hoodie-001',
                           title: 'Limited Edition Essential Zip Hoodie',
                           price: 14.99,

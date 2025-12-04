@@ -12,7 +12,9 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
-    if (cart.items.isEmpty) {
+    final items = getCartItems();
+
+    if (items.isEmpty) {
       return PageLayout(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -30,7 +32,7 @@ class _CartPageState extends State<CartPage> {
                 ),
                 const SizedBox(height: 12),
                 const Text(
-                  'Your cart is currently empty.',
+                  'Your cart is currently empty 🛒',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 16,
@@ -76,10 +78,10 @@ class _CartPageState extends State<CartPage> {
             ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: cart.items.length,
+              itemCount: items.length,
               separatorBuilder: (_, __) => const SizedBox(height: 12),
               itemBuilder: (context, index) {
-                final item = cart.items[index];
+                final item = items[index];
                 return Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -153,7 +155,7 @@ class _CartPageState extends State<CartPage> {
                             icon: const Icon(Icons.delete_outline),
                             onPressed: () {
                               setState(() {
-                                cart.removeItem(item.id);
+                                removeItemFromCart(item.id);
                               });
                             },
                           ),
@@ -186,7 +188,7 @@ class _CartPageState extends State<CartPage> {
                         ),
                       ),
                       Text(
-                        '£${cart.totalPrice.toStringAsFixed(2)}',
+                        '£${cartTotalPrice().toStringAsFixed(2)}',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
@@ -198,7 +200,7 @@ class _CartPageState extends State<CartPage> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        cart.clear();
+                        clearCart();
                       });
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(

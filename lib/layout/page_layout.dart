@@ -323,6 +323,8 @@ Widget buildHeader(BuildContext context) {
 }
 
 Widget buildFooter(BuildContext context) {
+  final emailController = TextEditingController();
+
   return Container(
     width: double.infinity,
     color: Colors.grey.shade100,
@@ -377,9 +379,10 @@ Widget buildFooter(BuildContext context) {
         const SizedBox(height: 8),
         Row(
           children: [
-            const Expanded(
+            Expanded(
               child: TextField(
-                decoration: InputDecoration(
+                controller: emailController,
+                decoration: const InputDecoration(
                   hintText: 'Email address',
                   border: OutlineInputBorder(),
                   isDense: true,
@@ -392,7 +395,15 @@ Widget buildFooter(BuildContext context) {
             SizedBox(
               height: 42,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Thank you! You are now subscribed ❤️'),
+                      duration: Duration(seconds: 1),
+                    ),
+                  );
+                  emailController.clear();
+                },
                 child: const Text('Subscribe'),
               ),
             ),
