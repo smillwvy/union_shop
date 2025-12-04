@@ -140,6 +140,7 @@ class _SaleProductCard extends StatelessWidget {
             builder: (_) => ProductPage(
               title: product['name'] ?? '',
               price: product['newPrice'] ?? '',
+              originalPrice: product['oldPrice'],
               imageUrl: product['image'] ?? '',
             ),
           ),

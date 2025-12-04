@@ -7,6 +7,7 @@ import 'package:union_shop/widgets/quantity_selector.dart';
 class ProductPage extends StatelessWidget {
   final String title;
   final String price;
+  final String? originalPrice;
   final String imageUrl;
 
   // This page accepts title/price/image from the caller so it can show any product.
@@ -14,6 +15,7 @@ class ProductPage extends StatelessWidget {
     super.key,
     required this.title,
     required this.price,
+    this.originalPrice,
     required this.imageUrl,
   });
 
@@ -23,6 +25,7 @@ class ProductPage extends StatelessWidget {
     return _ProductPageContent(
       title: title,
       price: price,
+      originalPrice: originalPrice,
       imageUrl: imageUrl,
     );
   }
@@ -31,11 +34,13 @@ class ProductPage extends StatelessWidget {
 class _ProductPageContent extends StatefulWidget {
   final String title;
   final String price;
+  final String? originalPrice;
   final String imageUrl;
 
   const _ProductPageContent({
     required this.title,
     required this.price,
+    required this.originalPrice,
     required this.imageUrl,
   });
 
@@ -109,23 +114,34 @@ class _ProductPageContentState extends State<_ProductPageContent> {
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      Text(
-                        widget.price,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
+                      if (widget.originalPrice != null &&
+                          widget.originalPrice != widget.price) ...[
+                        Text(
+                          widget.originalPrice!,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        widget.price,
-                        style: const TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w700,
-                          color: Color(0xFF4d2963),
+                        const SizedBox(width: 12),
+                        Text(
+                          widget.price,
+                          style: const TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF4d2963),
+                          ),
                         ),
-                      ),
+                      ] else
+                        Text(
+                          widget.price,
+                          style: const TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xFF4d2963),
+                          ),
+                        ),
                     ],
                   ),
                   const SizedBox(height: 4),
