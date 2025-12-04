@@ -56,144 +56,157 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
               horizontal: horizontalPadding,
               vertical: 32,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Personalisation',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Add custom text to your print. Choose how many lines you need, '
-                  'enter your wording, and we will handle the rest.',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.grey.shade800,
-                    height: 1.5,
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.grey.shade200),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.04),
-                        blurRadius: 12,
-                        offset: const Offset(0, 4),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 820),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Personalisation',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Expanded(
-                              child: LabeledDropdown(
-                                label: 'Per line',
-                                value: _selectedLines,
-                                items: _lineOptions,
-                                onChanged: (value) {
-                                  if (value != null) {
-                                    setState(() {
-                                      _selectedLines = value;
-                                    });
-                                  }
-                                },
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Add custom text to your print. Choose how many lines you need, '
+                      'enter your wording, and we will handle the rest.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Colors.grey.shade800,
+                        height: 1.5,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    Align(
+                      alignment: Alignment.center,
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 780),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(color: Colors.grey.shade200),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: 0.04),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
                               ),
-                            ),
-                            const SizedBox(width: 16),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  'Price',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Expanded(
+                                      child: LabeledDropdown(
+                                        label: 'Per line',
+                                        value: _selectedLines,
+                                        items: _lineOptions,
+                                        onChanged: (value) {
+                                          if (value != null) {
+                                            setState(() {
+                                              _selectedLines = value;
+                                            });
+                                          }
+                                        },
+                                      ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        const Text(
+                                          'Price',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          '£${_pricePerItem.toStringAsFixed(2)}',
+                                          style: const TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xFF4d2963),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 20),
+                                _buildTextField(
+                                  label: 'Personalisation line 1',
+                                  controller: _line1Controller,
+                                ),
+                                if (_isTwoLines) ...[
+                                  const SizedBox(height: 14),
+                                  _buildTextField(
+                                    label: 'Personalisation line 2',
+                                    controller: _line2Controller,
+                                  ),
+                                ],
+                                const SizedBox(height: 20),
+                                QuantitySelector(
+                                  quantity: _quantity,
+                                  onDecrement: () {
+                                    setState(() {
+                                      _quantity = _quantity > 1 ? _quantity - 1 : 1;
+                                    });
+                                  },
+                                  onIncrement: () {
+                                    setState(() {
+                                      _quantity += 1;
+                                    });
+                                  },
+                                ),
+                                const SizedBox(height: 12),
+                                Text(
+                                  'Total: £${_totalPrice.toStringAsFixed(2)}',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  '£${_pricePerItem.toStringAsFixed(2)}',
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFF4d2963),
+                                const SizedBox(height: 18),
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    onPressed: _handleAddToCart,
+                                    style: ElevatedButton.styleFrom(
+                                      padding:
+                                          const EdgeInsets.symmetric(vertical: 14),
+                                    ),
+                                    child: const Text(
+                                      'ADD TO CART',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        _buildTextField(
-                          label: 'Personalisation line 1',
-                          controller: _line1Controller,
-                        ),
-                        if (_isTwoLines) ...[
-                          const SizedBox(height: 14),
-                          _buildTextField(
-                            label: 'Personalisation line 2',
-                            controller: _line2Controller,
-                          ),
-                        ],
-                        const SizedBox(height: 20),
-                        QuantitySelector(
-                          quantity: _quantity,
-                          onDecrement: () {
-                            setState(() {
-                              _quantity = _quantity > 1 ? _quantity - 1 : 1;
-                            });
-                          },
-                          onIncrement: () {
-                            setState(() {
-                              _quantity += 1;
-                            });
-                          },
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          'Total: £${_totalPrice.toStringAsFixed(2)}',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
                           ),
                         ),
-                        const SizedBox(height: 18),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: _handleAddToCart,
-                            style: ElevatedButton.styleFrom(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 14),
-                            ),
-                            child: const Text(
-                              'ADD TO CART',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           );
         },

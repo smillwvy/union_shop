@@ -44,144 +44,235 @@ Widget buildHeader(BuildContext context) {
         // Top banner
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 8),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
           color: const Color(0xFF4d2963),
           child: const Text(
             'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white, fontSize: 17),
+            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w600),
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-          alignment: Alignment.centerLeft,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Logo link to home
-                GestureDetector(
-                  onTap: () => navigateTo('/', clear: true),
-                  child: Image.network(
-                    'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                    height: 18,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[300],
-                        width: 18,
-                        height: 18,
-                        child: const Center(
-                          child: Icon(Icons.image_not_supported,
-                              color: Colors.grey),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Logo link to home
+              GestureDetector(
+                onTap: () => navigateTo('/', clear: true),
+                child: Image.network(
+                  'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                  height: 18,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Colors.grey[300],
+                      width: 18,
+                      height: 18,
+                      child: const Center(
+                        child: Icon(Icons.image_not_supported,
+                            color: Colors.grey),
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(width: 12),
+              // Centered navigation links
+              Expanded(
+                child: Center(
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TextButton(
+                          onPressed: () => navigateTo('/', clear: true),
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          child: const Text('Home'),
                         ),
-                      );
-                    },
-                  ),
-                ),
-                const SizedBox(width: 12),
-                TextButton(
-                  onPressed: () => navigateTo('/', clear: true),
-                  child: const Text('Home'),
-                ),
-                TextButton(
-                  onPressed: () => navigateTo('/sale'),
-                  child: const Text('Sale'),
-                ),
-                PopupMenuButton<String>(
-                  onSelected: (value) => navigateTo(value),
-                  itemBuilder: (context) => const [
-                    PopupMenuItem(
-                      value: '/clothing',
-                      child: Text('Clothing'),
+                        TextButton(
+                          onPressed: () => navigateTo('/sale'),
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          child: const Text('SALE!'),
+                        ),
+                        PopupMenuButton<String>(
+                          onSelected: (value) => navigateTo(value),
+                          itemBuilder: (context) => const [
+                            PopupMenuItem(
+                              value: '/clothing',
+                              child: Text(
+                                'Clothing',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            PopupMenuItem(
+                              value: '/print-about',
+                              child: Text(
+                                'Print About',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            PopupMenuItem(
+                              value: '/personalisation',
+                              child: Text(
+                                'Personalisation',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            child: Text(
+                              'Shop ▾',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => navigateTo('/about'),
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.black,
+                            textStyle: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          child: const Text('About'),
+                        ),
+                        const SizedBox(width: 8),
+                        PopupMenuButton<String>(
+                          onSelected: (value) => navigateTo(value),
+                          itemBuilder: (context) => const [
+                            PopupMenuItem(
+                              value: '/print-about',
+                              child: Text(
+                                'About',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                            PopupMenuItem(
+                              value: '/personalisation',
+                              child: Text(
+                                'Personalisation',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                            child: Text(
+                              'The Print Shack ▾',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    PopupMenuItem(
-                      value: '/print-about',
-                      child: Text('Print About'),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              // Right-aligned header icons
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.search,
+                      size: 20,
+                      color: Colors.grey,
                     ),
-                    PopupMenuItem(
-                      value: '/personalisation',
-                      child: Text('Personalisation'),
+                    padding: const EdgeInsets.all(8),
+                    constraints: const BoxConstraints(
+                      minWidth: 32,
+                      minHeight: 32,
                     ),
-                  ],
-                  child: const Text('Shop ▾'),
-                ),
-                TextButton(
-                  onPressed: () => navigateTo('/about'),
-                  child: const Text('About'),
-                ),
-                const SizedBox(width: 8),
-                PopupMenuButton<String>(
-                  onSelected: (value) => navigateTo(value),
-                  itemBuilder: (context) => const [
-                    PopupMenuItem(
-                      value: '/print-about',
-                      child: Text('About'),
+                    onPressed: () => navigateTo('/search'),
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.person_outline,
+                      size: 20,
+                      color: Colors.grey,
                     ),
-                    PopupMenuItem(
-                      value: '/personalisation',
-                      child: Text('Personalisation'),
+                    padding: const EdgeInsets.all(8),
+                    constraints: const BoxConstraints(
+                      minWidth: 32,
+                      minHeight: 32,
                     ),
-                  ],
-                  child: const Text('The Print Shack ▾'),
-                ),
-                const SizedBox(width: 8),
-                // Header icons
-                IconButton(
-                  icon: const Icon(
-                    Icons.search,
-                    size: 18,
-                    color: Colors.grey,
+                    onPressed: () => navigateTo('/login'),
                   ),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
+                  IconButton(
+                    icon: const Icon(
+                      Icons.shopping_bag_outlined,
+                      size: 20,
+                      color: Colors.grey,
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    constraints: const BoxConstraints(
+                      minWidth: 32,
+                      minHeight: 32,
+                    ),
+                    onPressed: () => Navigator.pushNamed(context, '/cart'),
                   ),
-                  onPressed: () => navigateTo('/search'),
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.person_outline,
-                    size: 18,
-                    color: Colors.grey,
+                  IconButton(
+                    icon: const Icon(
+                      Icons.more_vert,
+                      size: 20,
+                      color: Colors.grey,
+                    ),
+                    padding: const EdgeInsets.all(8),
+                    constraints: const BoxConstraints(
+                      minWidth: 32,
+                      minHeight: 32,
+                    ),
+                    onPressed: () {},
                   ),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
-                  ),
-                  onPressed: () => navigateTo('/login'),
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.shopping_bag_outlined,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
-                  ),
-                  onPressed: () => Navigator.pushNamed(context, '/cart'),
-                ),
-                IconButton(
-                  icon: const Icon(
-                    Icons.menu,
-                    size: 18,
-                    color: Colors.grey,
-                  ),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(
-                    minWidth: 32,
-                    minHeight: 32,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
-            ),
+                ],
+              ),
+            ],
           ),
         ),
       ],
