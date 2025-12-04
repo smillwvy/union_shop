@@ -35,20 +35,20 @@ flutter run
 - Navigate between login and signup screens (UI only; no backend).
 
 ## Screenshots
-A quick visual tour of the main flows (desktop captures).
+A quick visual tour of the main flows (desktop captures). Screenshots now live in `assets/screenshots/` to keep them separate from product art.
 
 <table>
   <tr>
-    <td><img src="assets/images/home_page_screenshot.png" alt="Home page" width="350"></td>
-    <td><img src="assets/images/collections_screenshot.png" alt="Collections page" width="350"></td>
+    <td><img src="assets/screenshots/home_page_screenshot.png" alt="Home page" width="350"></td>
+    <td><img src="assets/screenshots/collections_screenshot.png" alt="Collections page" width="350"></td>
   </tr>
   <tr>
-    <td><img src="assets/images/product_page_screenshot.png" alt="Product page" width="350"></td>
-    <td><img src="assets/images/cart_page_screenshot.png" alt="Cart page" width="350"></td>
+    <td><img src="assets/screenshots/product_page_screenshot.png" alt="Product page" width="350"></td>
+    <td><img src="assets/screenshots/cart_page_screenshot.png" alt="Cart page" width="350"></td>
   </tr>
   <tr>
-    <td><img src="assets/images/search_screenshot.png" alt="Search page" width="350"></td>
-    <td><img src="assets/images/personalisation_screenshot.png" alt="Print Shack personalisation page" width="350"></td>
+    <td><img src="assets/screenshots/search_screenshot.png" alt="Search page" width="350"></td>
+    <td><img src="assets/screenshots/personalisation_screenshot.png" alt="Print Shack personalisation page" width="350"></td>
   </tr>
 </table>
 
@@ -58,7 +58,8 @@ A quick visual tour of the main flows (desktop captures).
 - `lib/pages/` – All screens (home, collections, sale, product, cart, search, Print Shack about, personalisation, login, signup, about).
 - `lib/widgets/` – Reusable UI pieces (`ProductCard`, `LabeledDropdown`, `QuantitySelector`).
 - `lib/models/cart.dart` – In-memory cart model and cart item definition.
-- `assets/images/` – Local product and promo assets used across pages.
+- `assets/images/` – Product and promo assets used in the UI.
+- `assets/screenshots/` – README-only screenshots of core flows.
 
 ## Technologies Used
 - Flutter and Dart (Material design widgets)
