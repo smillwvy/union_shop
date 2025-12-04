@@ -197,8 +197,8 @@ class _ProductPageContentState extends State<_ProductPageContent> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        addToCart(
-                          id: 'hoodie-001',
+                        addItem(
+                          id: widget.title,
                           title: widget.title,
                           price: _parsePrice(widget.price),
                           imageUrl: widget.imageUrl,

@@ -32,7 +32,7 @@ double cartTotalPrice() => cartItems.fold(
     );
 
 // Add a product or increase quantity if it already exists.
-void addToCart({
+void addItem({
   required String id,
   required String title,
   required double price,

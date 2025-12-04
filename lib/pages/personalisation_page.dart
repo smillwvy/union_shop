@@ -252,7 +252,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
         _isTwoLines ? 'Print personalisation (two lines)' : 'Print personalisation (one line)';
 
     // Add to cart using current price and quantity.
-    addToCart(
+    addItem(
       id: itemId,
       title: itemTitle,
       price: _pricePerItem,
