@@ -170,7 +170,7 @@ Widget buildHeader(BuildContext context) {
                     minWidth: 32,
                     minHeight: 32,
                   ),
-                  onPressed: () {},
+                  onPressed: () => navigateTo('/login'),
                 ),
                 IconButton(
                   icon: const Icon(
