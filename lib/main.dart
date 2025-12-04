@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/pages/about_page.dart';
 import 'package:union_shop/pages/collection_page.dart';
 import 'package:union_shop/pages/collections_page.dart';
+import 'package:union_shop/pages/login_page.dart';
 import 'package:union_shop/pages/home_page.dart';
 import 'package:union_shop/pages/cart_page.dart';
 import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/pages/sale_page.dart';
+import 'package:union_shop/pages/signup_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -43,6 +45,8 @@ class UnionShopApp extends StatelessWidget {
         '/print-about': (context) => const SimplePage(title: 'Print About'),
         '/personalisation': (context) =>
             const SimplePage(title: 'Personalisation'),
+        '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignupPage(),
       },
     );
   }
