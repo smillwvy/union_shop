@@ -97,30 +97,6 @@ Widget buildHeader(BuildContext context) {
                       child: Text('Clothing'),
                     ),
                     PopupMenuItem(
-                      value: '/merch',
-                      child: Text('Merch'),
-                    ),
-                    PopupMenuItem(
-                      value: '/halloween',
-                      child: Text('Halloween'),
-                    ),
-                    PopupMenuItem(
-                      value: '/sig-essential',
-                      child: Text('Signature Essential'),
-                    ),
-                    PopupMenuItem(
-                      value: '/city-collection',
-                      child: Text('City Collection'),
-                    ),
-                    PopupMenuItem(
-                      value: '/pride',
-                      child: Text('Pride'),
-                    ),
-                    PopupMenuItem(
-                      value: '/graduation',
-                      child: Text('Graduation'),
-                    ),
-                    PopupMenuItem(
                       value: '/print-about',
                       child: Text('Print About'),
                     ),
