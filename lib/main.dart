@@ -8,6 +8,8 @@ import 'package:union_shop/pages/cart_page.dart';
 import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/pages/sale_page.dart';
 import 'package:union_shop/pages/signup_page.dart';
+import 'package:union_shop/pages/personalisation_page.dart';
+import 'package:union_shop/pages/print_about_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -42,9 +44,8 @@ class UnionShopApp extends StatelessWidget {
             const SimplePage(title: 'City Collection'),
         '/pride': (context) => const SimplePage(title: 'Pride'),
         '/graduation': (context) => const SimplePage(title: 'Graduation'),
-        '/print-about': (context) => const SimplePage(title: 'Print About'),
-        '/personalisation': (context) =>
-            const SimplePage(title: 'Personalisation'),
+        '/print-about': (context) => const PrintAboutPage(),
+        '/personalisation': (context) => const PersonalisationPage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignupPage(),
       },
