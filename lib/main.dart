@@ -33,7 +33,11 @@ class UnionShopApp extends StatelessWidget {
         '/': (context) => const HomePage(),
         '/about': (context) => const AboutPage(),
         '/collection': (context) => const CollectionPage(),
-        '/product': (context) => const ProductPage(),
+        '/product': (context) => const ProductPage(
+              title: 'Limited Edition Essential Zip Hoodies',
+              price: '£14.99',
+              imageUrl: 'assets/images/essential_hoodie.png',
+            ),
         '/sale': (context) => const SalePage(),
         '/clothing': (context) => const CollectionsPage(),
         '/collections': (context) => const CollectionsPage(),

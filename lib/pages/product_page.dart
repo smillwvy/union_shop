@@ -4,20 +4,55 @@ import 'package:union_shop/models/cart.dart';
 import 'package:union_shop/widgets/labeled_dropdown.dart';
 import 'package:union_shop/widgets/quantity_selector.dart';
 
-class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+class ProductPage extends StatelessWidget {
+  final String title;
+  final String price;
+  final String imageUrl;
+
+  const ProductPage({
+    super.key,
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+  });
 
   @override
-  State<ProductPage> createState() => _ProductPageState();
+  Widget build(BuildContext context) {
+    return _ProductPageContent(
+      title: title,
+      price: price,
+      imageUrl: imageUrl,
+    );
+  }
 }
 
-class _ProductPageState extends State<ProductPage> {
+class _ProductPageContent extends StatefulWidget {
+  final String title;
+  final String price;
+  final String imageUrl;
+
+  const _ProductPageContent({
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+  });
+
+  @override
+  State<_ProductPageContent> createState() => _ProductPageContentState();
+}
+
+class _ProductPageContentState extends State<_ProductPageContent> {
   final List<String> _colors = ['Baby Pink', 'Grey', 'Purple', 'Blue'];
   final List<String> _sizes = ['S', 'M', 'L'];
 
   String _selectedColor = 'Baby Pink';
   String _selectedSize = 'M';
   int _quantity = 1;
+
+  double _parsePrice(String price) {
+    final numeric = price.replaceAll(RegExp(r'[^\d.]'), '');
+    return double.tryParse(numeric) ?? 0.0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +75,7 @@ class _ProductPageState extends State<ProductPage> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
                     child: Image.asset(
-                      'assets/images/essential_hoodie.png',
+                      widget.imageUrl,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -50,29 +85,29 @@ class _ProductPageState extends State<ProductPage> {
               final Widget detailsSection = Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Limited Edition Essential Zip Hoodies',
-                    style: TextStyle(
+                  Text(
+                    widget.title,
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
                   const SizedBox(height: 12),
-                  const Row(
+                  Row(
                     children: [
                       Text(
-                        '£20.00',
-                        style: TextStyle(
+                        widget.price,
+                        style: const TextStyle(
                           fontSize: 18,
                           color: Colors.grey,
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
-                      SizedBox(width: 12),
+                      const SizedBox(width: 12),
                       Text(
-                        '£14.99',
-                        style: TextStyle(
+                        widget.price,
+                        style: const TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w700,
                           color: Color(0xFF4d2963),
@@ -135,9 +170,9 @@ class _ProductPageState extends State<ProductPage> {
                       onPressed: () {
                         addToCart(
                           id: 'hoodie-001',
-                          title: 'Limited Edition Essential Zip Hoodie',
-                          price: 14.99,
-                          imageUrl: 'assets/images/essential_hoodie.png',
+                          title: widget.title,
+                          price: _parsePrice(widget.price),
+                          imageUrl: widget.imageUrl,
                           quantity: _quantity,
                         );
                         ScaffoldMessenger.of(context).showSnackBar(

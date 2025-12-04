@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/layout/page_layout.dart';
+import 'package:union_shop/pages/product_page.dart';
 
 const List<Map<String, String>> _saleProducts = [
   {
@@ -128,7 +129,18 @@ class _SaleProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, '/product'),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ProductPage(
+              title: product['name'] ?? '',
+              price: product['newPrice'] ?? '',
+              imageUrl: product['image'] ?? '',
+            ),
+          ),
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/pages/product_page.dart';
 
 class ProductCard extends StatelessWidget {
   final String title;
@@ -16,7 +17,16 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/product');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => ProductPage(
+              title: title,
+              price: price,
+              imageUrl: imageUrl,
+            ),
+          ),
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
