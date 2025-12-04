@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/layout/page_layout.dart';
-import 'signup_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -64,10 +63,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 16),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const SignupPage()),
-                  );
+                  Navigator.pushNamed(context, '/signup');
                 },
                 child: const Text("Don't have an account? Sign up"),
               ),

@@ -78,6 +78,7 @@ class SignupPage extends StatelessWidget {
               ),
 
               const SizedBox(height: 16),
+              // Link to login page
               TextButton(
                 onPressed: () {
                   Navigator.push(

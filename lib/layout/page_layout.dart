@@ -8,6 +8,7 @@ class PageLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // Common page chrome: header on top, body content, footer at bottom.
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(child: buildHeader(context)),
@@ -28,6 +29,7 @@ class PageLayout extends StatelessWidget {
 }
 
 Widget buildHeader(BuildContext context) {
+  // Helper to move between screens.
   void navigateTo(String route, {bool clear = false}) {
     if (clear) {
       Navigator.pushNamedAndRemoveUntil(context, route, (route) => false);
@@ -36,6 +38,7 @@ Widget buildHeader(BuildContext context) {
     }
   }
 
+  // Shared navigation header with banner, links, and action icons.
   return Container(
     color: Colors.white,
     child: Column(
@@ -56,8 +59,10 @@ Widget buildHeader(BuildContext context) {
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
           child: LayoutBuilder(
             builder: (context, constraints) {
+              // If screen is narrow, let the header scroll horizontally.
               final isTight = constraints.maxWidth < 520;
 
+              // Main navigation links (Home, Sale, Shop menu, About, etc).
               final navLinks = Row(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -186,6 +191,7 @@ Widget buildHeader(BuildContext context) {
                 ],
               );
 
+              // Icons on the right (search, profile, cart, more).
               final iconActions = Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -245,6 +251,7 @@ Widget buildHeader(BuildContext context) {
               );
 
               if (isTight) {
+                // Small screens: put everything in a horizontal scroll view.
                 return SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -282,6 +289,7 @@ Widget buildHeader(BuildContext context) {
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  // Logo that sends you home.
                   GestureDetector(
                     onTap: () => navigateTo('/', clear: true),
                     child: Image.network(
@@ -323,6 +331,7 @@ Widget buildHeader(BuildContext context) {
 }
 
 Widget buildFooter(BuildContext context) {
+  // Kept inside to clear automatically when widget rebuilds.
   final emailController = TextEditingController();
 
   return Container(

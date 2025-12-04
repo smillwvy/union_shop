@@ -9,6 +9,7 @@ class CollectionPage extends StatefulWidget {
 }
 
 class _CollectionPageState extends State<CollectionPage> {
+  // Track current filter and sort selection.
   String _selectedFilter = 'All products';
   String _selectedSort = 'Featured';
 
@@ -26,6 +27,7 @@ class _CollectionPageState extends State<CollectionPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Page title + subtitle.
               const Text(
                 'Winter Favourites',
                 textAlign: TextAlign.center,
@@ -44,8 +46,10 @@ class _CollectionPageState extends State<CollectionPage> {
                 ),
               ),
               const SizedBox(height: 20),
+              // Filters and sort dropdowns.
               _buildFilterSortBar(),
               const SizedBox(height: 24),
+              // Placeholder where product grid would go.
               const Center(
                 child: Text(
                   'Clothing collection page (placeholder)',
@@ -74,6 +78,7 @@ class _CollectionPageState extends State<CollectionPage> {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
+            // Filter dropdown.
             _buildDropdown(
               label: 'FILTER BY',
               value: _selectedFilter,
@@ -99,6 +104,7 @@ class _CollectionPageState extends State<CollectionPage> {
               },
             ),
             const SizedBox(width: 12),
+            // Sort dropdown.
             _buildDropdown(
               label: 'SORT BY',
               value: _selectedSort,
@@ -144,6 +150,7 @@ class _CollectionPageState extends State<CollectionPage> {
     required List<DropdownMenuItem<String>> items,
     required ValueChanged<String?> onChanged,
   }) {
+    // Reusable dropdown with a label on the left.
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [

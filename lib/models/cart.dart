@@ -14,21 +14,24 @@ class CartItem {
   });
 }
 
-/// Simple global cart state using top-level helpers.
 final List<CartItem> cartItems = [];
 
 List<CartItem> getCartItems() => List.unmodifiable(cartItems);
 
+// How many unique items are in the cart (not counting quantities).
 int cartTotalItems() => cartItems.length;
 
+// Total number of units across all items.
 int cartTotalQuantity() =>
     cartItems.fold(0, (sum, item) => sum + item.quantity);
 
+// Total price across all items (price * quantity).
 double cartTotalPrice() => cartItems.fold(
       0.0,
       (sum, item) => sum + item.price * item.quantity,
     );
 
+// Add a product or increase quantity if it already exists.
 void addToCart({
   required String id,
   required String title,
@@ -54,6 +57,7 @@ void addToCart({
   }
 }
 
+// Remove a single unit; drop the item if it reaches zero.
 void removeOneFromCart(String id) {
   final index = cartItems.indexWhere((item) => item.id == id);
   if (index == -1) return;
@@ -66,10 +70,12 @@ void removeOneFromCart(String id) {
   }
 }
 
+// Remove the entire item regardless of quantity.
 void removeItemFromCart(String id) {
   cartItems.removeWhere((item) => item.id == id);
 }
 
+// Empty the cart.
 void clearCart() {
   cartItems.clear();
 }

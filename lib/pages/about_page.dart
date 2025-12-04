@@ -6,10 +6,12 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Reuse the shared page layout (header + footer).
     return PageLayout(
       child: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
+          // Adjust side padding so content stays readable on all screen sizes.
           final horizontalPadding = width >= 1200
               ? 200.0
               : width >= 900

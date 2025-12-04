@@ -9,6 +9,7 @@ class ProductPage extends StatelessWidget {
   final String price;
   final String imageUrl;
 
+  // This page accepts title/price/image from the caller so it can show any product.
   const ProductPage({
     super.key,
     required this.title,
@@ -18,6 +19,7 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Delegate to a stateful widget to handle dropdowns and quantity.
     return _ProductPageContent(
       title: title,
       price: price,
@@ -45,13 +47,21 @@ class _ProductPageContentState extends State<_ProductPageContent> {
   final List<String> _colors = ['Baby Pink', 'Grey', 'Purple', 'Blue'];
   final List<String> _sizes = ['S', 'M', 'L'];
 
+  // Current selections.
   String _selectedColor = 'Baby Pink';
   String _selectedSize = 'M';
   int _quantity = 1;
 
+  // Convert a price string like "£14.99" into a double.
   double _parsePrice(String price) {
-    final numeric = price.replaceAll(RegExp(r'[^\d.]'), '');
-    return double.tryParse(numeric) ?? 0.0;
+    // Trim spaces first.
+    var cleaned = price.trim();
+    // Drop the pound symbol if present.
+    if (cleaned.startsWith('£')) {
+      cleaned = cleaned.substring(1);
+    }
+    // Parse to number; fall back to 0.0 if invalid.
+    return double.tryParse(cleaned) ?? 0.0;
   }
 
   @override
@@ -63,7 +73,9 @@ class _ProductPageContentState extends State<_ProductPageContent> {
           padding: const EdgeInsets.all(24),
           child: LayoutBuilder(
             builder: (context, constraints) {
+              // If wide screen, show image and details side by side.
               final bool isWide = constraints.maxWidth > 800;
+              // Image block.
               final Widget imageSection = AspectRatio(
                 aspectRatio: 1,
                 child: Container(
@@ -82,6 +94,7 @@ class _ProductPageContentState extends State<_ProductPageContent> {
                 ),
               );
 
+              // Details block: title, price, options, quantity, add to cart, description.
               final Widget detailsSection = Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

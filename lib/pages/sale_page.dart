@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/layout/page_layout.dart';
 import 'package:union_shop/pages/product_page.dart';
 
+// Static list of sale products (name, old/new price, image).
 const List<Map<String, String>> _saleProducts = [
   {
     'name': 'Classic Sweatshirt - Neutral',
@@ -43,6 +44,7 @@ class SalePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Header banner for the sale.
               Container(
                 width: double.infinity,
                 color: Colors.grey.shade100,
@@ -84,6 +86,7 @@ class SalePage extends StatelessWidget {
                 child: LayoutBuilder(
                   builder: (context, innerConstraints) {
                     final width = innerConstraints.maxWidth;
+                    // Decide how many columns and the card shape based on width.
                     final crossAxisCount = width >= 1000
                         ? 3
                         : width >= 700
@@ -107,6 +110,7 @@ class SalePage extends StatelessWidget {
                       itemCount: _saleProducts.length,
                       itemBuilder: (context, index) {
                         final product = _saleProducts[index];
+                        // Each grid item is a sale product card.
                         return _SaleProductCard(product: product);
                       },
                     );

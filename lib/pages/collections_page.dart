@@ -3,6 +3,7 @@ import 'package:union_shop/layout/page_layout.dart';
 import 'package:union_shop/widgets/product_card.dart';
 
 const List<Map<String, String>> _products = [
+  // Static product data for the grid.
   {
     'title': 'Limited Edition Essential Zip Hoodie',
     'price': '£14.99',
@@ -43,6 +44,7 @@ class CollectionsPage extends StatefulWidget {
 }
 
 class _CollectionsPageState extends State<CollectionsPage> {
+  // Track current filter and sort selection (UI only for now).
   String _selectedFilter = 'All products';
   String _selectedSort = 'Featured';
 
@@ -64,6 +66,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // Page title and subtitle.
                     const Text(
                       'Winter Favourites',
                       textAlign: TextAlign.center,
@@ -82,6 +85,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                       ),
                     ),
                     const SizedBox(height: 16),
+                    // Filters and sort controls.
                     _buildFilterSortBar(),
                   ],
                 ),
@@ -90,6 +94,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                 padding: const EdgeInsets.all(16),
                 child: LayoutBuilder(builder: (context, innerConstraints) {
                   final width = innerConstraints.maxWidth;
+                  // Choose grid layout based on available width.
                   final crossAxisCount = width >= 1000
                       ? 3
                       : width >= 700
@@ -99,23 +104,41 @@ class _CollectionsPageState extends State<CollectionsPage> {
                               : 1;
                   final childAspect = width >= 1000 ? 0.8 : 0.9;
 
-                  return GridView.count(
+                  // Product grid layout:
+                  // - shrinkWrap: true => take only needed height.
+                  // - NeverScrollableScrollPhysics => parent handles scrolling.
+                  // - crossAxisCount / spacing / aspect ratio => grid layout.
+                  // - itemBuilder => loop over _products and build ProductCard.
+                  return GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: crossAxisCount,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: childAspect,
-                    children: _products
-                        .map((p) => Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
-                              child: ProductCard(
-                                title: p['title'] ?? '',
-                                price: p['price'] ?? '',
-                                imageUrl: p['imageUrl'] ?? '',
-                              ),
-                            ))
-                        .toList(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: crossAxisCount,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: childAspect,
+                    ),
+                    itemCount: _products.length,
+                    itemBuilder: (context, index) {
+                      final product = _products[index];
+                      // Pull fields with simple fallback strings (no ??: syntax).
+                      final title = product['title'] != null
+                          ? product['title']!
+                          : 'Product';
+                      final price =
+                          product['price'] != null ? product['price']! : '£0.00';
+                      final imageUrl = product['imageUrl'] != null
+                          ? product['imageUrl']!
+                          : '';
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: ProductCard(
+                          title: title,
+                          price: price,
+                          imageUrl: imageUrl,
+                        ),
+                      );
+                    },
                   );
                 }),
               ),
@@ -139,6 +162,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
+            // Filter dropdown.
             _buildDropdownSection(
               label: 'FILTER BY',
               value: _selectedFilter,
@@ -151,6 +175,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
               },
             ),
             const SizedBox(width: 12),
+            // Sort dropdown.
             _buildDropdownSection(
               label: 'SORT BY',
               value: _selectedSort,
@@ -163,6 +188,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
               },
             ),
             const SizedBox(width: 12),
+            // Static count label.
             Text(
               '6 products',
               style: TextStyle(

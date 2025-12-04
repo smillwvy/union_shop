@@ -13,6 +13,7 @@ import 'package:union_shop/pages/print_about_page.dart';
 import 'package:union_shop/pages/search_page.dart';
 
 void main() {
+  // Entry point of the app.
   runApp(const UnionShopApp());
 }
 
@@ -29,6 +30,7 @@ class UnionShopApp extends StatelessWidget {
         fontFamily: 'Roboto',
       ),
       initialRoute: '/',
+      // All named routes used in the app.
       routes: {
         '/': (context) => const HomePage(),
         '/about': (context) => const AboutPage(),

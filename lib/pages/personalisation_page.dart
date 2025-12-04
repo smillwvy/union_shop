@@ -12,6 +12,7 @@ class PersonalisationPage extends StatefulWidget {
 }
 
 class _PersonalisationPageState extends State<PersonalisationPage> {
+  // Controllers for user input lines.
   final TextEditingController _line1Controller = TextEditingController();
   final TextEditingController _line2Controller = TextEditingController();
 
@@ -20,9 +21,11 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
     'Two lines of text',
   ];
 
+  // Track selected option and quantity.
   String _selectedLines = _lineOptions.first;
   int _quantity = 1;
 
+  // Pricing rules.
   double get _pricePerItem =>
       _selectedLines == 'Two lines of text' ? 5.0 : 3.0;
 
@@ -43,6 +46,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
       child: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
+          // Adjust side padding for different screen sizes.
           final horizontalPadding = width >= 1200
               ? 200.0
               : width >= 900
@@ -62,6 +66,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // Page heading and intro text.
                     const Text(
                       'Personalisation',
                       textAlign: TextAlign.center,
@@ -82,6 +87,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                       ),
                     ),
                     const SizedBox(height: 24),
+                    // Main card with form controls.
                     Align(
                       alignment: Alignment.center,
                       child: ConstrainedBox(
@@ -113,12 +119,10 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
                                         label: 'Per line',
                                         value: _selectedLines,
                                         items: _lineOptions,
+                                        // Update selection when user picks one line or two lines.
                                         onChanged: (value) {
-                                          if (value != null) {
-                                            setState(() {
-                                              _selectedLines = value;
-                                            });
-                                          }
+                                          if (value == null) return;
+                                          setState(() => _selectedLines = value);
                                         },
                                       ),
                                     ),
@@ -218,6 +222,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
     required String label,
     required TextEditingController controller,
   }) {
+    // Reusable text field with label.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -241,10 +246,12 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
   }
 
   void _handleAddToCart() {
+    // Build item details based on selected line count.
     final itemId = _isTwoLines ? 'personalisation-2' : 'personalisation-1';
     final itemTitle =
         _isTwoLines ? 'Print personalisation (two lines)' : 'Print personalisation (one line)';
 
+    // Add to cart using current price and quantity.
     addToCart(
       id: itemId,
       title: itemTitle,
@@ -253,6 +260,7 @@ class _PersonalisationPageState extends State<PersonalisationPage> {
       quantity: _quantity,
     );
 
+    // Confirmation message.
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Added personalisation to cart'),

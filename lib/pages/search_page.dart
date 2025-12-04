@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/layout/page_layout.dart';
 import 'package:union_shop/widgets/product_card.dart';
 
+// Static list of products to search through.
 const List<Map<String, String>> _allProducts = [
   {
     'title': 'Limited Edition Essential Zip Hoodies',
@@ -62,12 +63,6 @@ class _SearchPageState extends State<SearchPage> {
     super.dispose();
   }
 
-  void _handleSubmit() {
-    setState(() {
-      _query = _controller.text.trim();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -84,6 +79,7 @@ class _SearchPageState extends State<SearchPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              // Header text.
               Text(
                 'Search our Products',
                 textAlign: TextAlign.center,
@@ -99,9 +95,13 @@ class _SearchPageState extends State<SearchPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      // Search input.
                       TextField(
                         controller: _controller,
-                        onSubmitted: (_) => _handleSubmit(),
+                        onChanged: (value) =>
+                            setState(() => _query = value.trim()),
+                        onSubmitted: (_) =>
+                            setState(() => _query = _controller.text.trim()),
                         decoration: InputDecoration(
                           hintText: 'Search',
                           contentPadding: const EdgeInsets.symmetric(
@@ -118,10 +118,12 @@ class _SearchPageState extends State<SearchPage> {
                         ),
                       ),
                       const SizedBox(height: 10),
+                      // Submit button.
                       SizedBox(
                         height: 46,
                         child: ElevatedButton(
-                          onPressed: _handleSubmit,
+                          onPressed: () =>
+                              setState(() => _query = _controller.text.trim()),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF4d2963),
                             foregroundColor: Colors.white,
@@ -147,6 +149,7 @@ class _SearchPageState extends State<SearchPage> {
               LayoutBuilder(
                 builder: (context, constraints) {
                   final hasQuery = _query.isNotEmpty;
+                  // Filter products by query (case-insensitive match in title).
                   final results = hasQuery
                       ? _allProducts.where((product) {
                           final title = product['title'] ?? '';
@@ -166,6 +169,7 @@ class _SearchPageState extends State<SearchPage> {
                     );
                   }
 
+                  // Build a responsive grid of results.
                   final width = constraints.maxWidth;
                   final crossAxisCount = width >= 1000
                       ? 3
