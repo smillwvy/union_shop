@@ -10,6 +10,7 @@ import 'package:union_shop/pages/sale_page.dart';
 import 'package:union_shop/pages/signup_page.dart';
 import 'package:union_shop/pages/personalisation_page.dart';
 import 'package:union_shop/pages/print_about_page.dart';
+import 'package:union_shop/pages/search_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -25,6 +26,7 @@ class UnionShopApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
+        fontFamily: 'Roboto',
       ),
       initialRoute: '/',
       routes: {
@@ -48,6 +50,7 @@ class UnionShopApp extends StatelessWidget {
         '/personalisation': (context) => const PersonalisationPage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignupPage(),
+        '/search': (context) => const SearchPage(),
       },
     );
   }

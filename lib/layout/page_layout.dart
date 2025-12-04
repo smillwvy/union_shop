@@ -157,7 +157,7 @@ Widget buildHeader(BuildContext context) {
                     minWidth: 32,
                     minHeight: 32,
                   ),
-                  onPressed: () {},
+                  onPressed: () => navigateTo('/search'),
                 ),
                 IconButton(
                   icon: const Icon(
