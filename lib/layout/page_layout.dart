@@ -54,168 +54,139 @@ Widget buildHeader(BuildContext context) {
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Logo link to home
-              GestureDetector(
-                onTap: () => navigateTo('/', clear: true),
-                child: Image.network(
-                  'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                  height: 18,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: Colors.grey[300],
-                      width: 18,
-                      height: 18,
-                      child: const Center(
-                        child: Icon(Icons.image_not_supported,
-                            color: Colors.grey),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isTight = constraints.maxWidth < 520;
+
+              final navLinks = Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () => navigateTo('/', clear: true),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
                       ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(width: 12),
-              // Centered navigation links
-              Expanded(
-                child: Center(
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        TextButton(
-                          onPressed: () => navigateTo('/', clear: true),
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.black,
-                            textStyle: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          child: const Text('Home'),
-                        ),
-                        TextButton(
-                          onPressed: () => navigateTo('/sale'),
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.black,
-                            textStyle: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          child: const Text('SALE!'),
-                        ),
-                        PopupMenuButton<String>(
-                          onSelected: (value) => navigateTo(value),
-                          itemBuilder: (context) => const [
-                            PopupMenuItem(
-                              value: '/clothing',
-                              child: Text(
-                                'Clothing',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            PopupMenuItem(
-                              value: '/print-about',
-                              child: Text(
-                                'Print About',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            PopupMenuItem(
-                              value: '/personalisation',
-                              child: Text(
-                                'Personalisation',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                            child: Text(
-                              'Shop ▾',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
+                    ),
+                    child: const Text('Home'),
+                  ),
+                  TextButton(
+                    onPressed: () => navigateTo('/sale'),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    child: const Text('SALE!'),
+                  ),
+                  PopupMenuButton<String>(
+                    onSelected: (value) => navigateTo(value),
+                    itemBuilder: (context) => const [
+                      PopupMenuItem(
+                        value: '/clothing',
+                        child: Text(
+                          'Clothing',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () => navigateTo('/about'),
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.black,
-                            textStyle: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          child: const Text('About'),
-                        ),
-                        const SizedBox(width: 8),
-                        PopupMenuButton<String>(
-                          onSelected: (value) => navigateTo(value),
-                          itemBuilder: (context) => const [
-                            PopupMenuItem(
-                              value: '/print-about',
-                              child: Text(
-                                'About',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            PopupMenuItem(
-                              value: '/personalisation',
-                              child: Text(
-                                'Personalisation',
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ],
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                            child: Text(
-                              'The Print Shack ▾',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
+                      ),
+                      PopupMenuItem(
+                        value: '/print-about',
+                        child: Text(
+                          'Print About',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                      ],
+                      ),
+                      PopupMenuItem(
+                        value: '/personalisation',
+                        child: Text(
+                          'Personalisation',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      child: Text(
+                        'Shop ▾',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              // Right-aligned header icons
-              Row(
+                  TextButton(
+                    onPressed: () => navigateTo('/about'),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      textStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    child: const Text('About'),
+                  ),
+                  const SizedBox(width: 8),
+                  PopupMenuButton<String>(
+                    onSelected: (value) => navigateTo(value),
+                    itemBuilder: (context) => const [
+                      PopupMenuItem(
+                        value: '/print-about',
+                        child: Text(
+                          'About',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      PopupMenuItem(
+                        value: '/personalisation',
+                        child: Text(
+                          'Personalisation',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      child: Text(
+                        'The Print Shack ▾',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+
+              final iconActions = Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
@@ -271,8 +242,79 @@ Widget buildHeader(BuildContext context) {
                     onPressed: () {},
                   ),
                 ],
-              ),
-            ],
+              );
+
+              if (isTight) {
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () => navigateTo('/', clear: true),
+                        child: Image.network(
+                          'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                          height: 18,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[300],
+                              width: 18,
+                              height: 18,
+                              child: const Center(
+                                child: Icon(Icons.image_not_supported,
+                                    color: Colors.grey),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      navLinks,
+                      const SizedBox(width: 12),
+                      iconActions,
+                    ],
+                  ),
+                );
+              }
+
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () => navigateTo('/', clear: true),
+                    child: Image.network(
+                      'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                      height: 18,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey[300],
+                          width: 18,
+                          height: 18,
+                          child: const Center(
+                            child: Icon(Icons.image_not_supported,
+                                color: Colors.grey),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Center(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: navLinks,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  iconActions,
+                ],
+              );
+            },
           ),
         ),
       ],
