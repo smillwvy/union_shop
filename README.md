@@ -34,6 +34,24 @@ flutter run
 - Use the personalisation flow: choose one or two lines, the form adapts, pricing updates (£3/£5), set quantity, and add to cart.
 - Navigate between login and signup screens (UI only; no backend).
 
+## Screenshots
+A quick visual tour of the main flows (desktop captures).
+
+<table>
+  <tr>
+    <td><img src="assets/images/home_page_screenshot.png" alt="Home page" width="350"></td>
+    <td><img src="assets/images/collections_screenshot.png" alt="Collections page" width="350"></td>
+  </tr>
+  <tr>
+    <td><img src="assets/images/product_page_screenshot.png" alt="Product page" width="350"></td>
+    <td><img src="assets/images/cart_page_screenshot.png" alt="Cart page" width="350"></td>
+  </tr>
+  <tr>
+    <td><img src="assets/images/search_screenshot.png" alt="Search page" width="350"></td>
+    <td><img src="assets/images/personalisation_screenshot.png" alt="Print Shack personalisation page" width="350"></td>
+  </tr>
+</table>
+
 ## Project Structure
 - `lib/main.dart` – App entry point, MaterialApp setup, and route map.
 - `lib/layout/page_layout.dart` – Shared scaffold with navbar, footer, and scrollable shell.
