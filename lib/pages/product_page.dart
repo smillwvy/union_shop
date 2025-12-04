@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/layout/page_layout.dart';
 import 'package:union_shop/models/cart.dart';
+import 'package:union_shop/widgets/labeled_dropdown.dart';
+import 'package:union_shop/widgets/quantity_selector.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -87,7 +89,7 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  _buildDropdown(
+                  LabeledDropdown(
                     label: 'Color',
                     value: _selectedColor,
                     items: _colors,
@@ -100,7 +102,7 @@ class _ProductPageState extends State<ProductPage> {
                     },
                   ),
                   const SizedBox(height: 16),
-                  _buildDropdown(
+                  LabeledDropdown(
                     label: 'Size',
                     value: _selectedSize,
                     items: _sizes,
@@ -113,45 +115,18 @@ class _ProductPageState extends State<ProductPage> {
                     },
                   ),
                   const SizedBox(height: 16),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Quantity',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _quantity = _quantity > 1 ? _quantity - 1 : 1;
-                              });
-                            },
-                            icon: const Icon(Icons.remove),
-                          ),
-                          Text(
-                            '$_quantity',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _quantity += 1;
-                              });
-                            },
-                            icon: const Icon(Icons.add),
-                          ),
-                        ],
-                      ),
-                    ],
+                  QuantitySelector(
+                    quantity: _quantity,
+                    onDecrement: () {
+                      setState(() {
+                        _quantity = _quantity > 1 ? _quantity - 1 : 1;
+                      });
+                    },
+                    onIncrement: () {
+                      setState(() {
+                        _quantity += 1;
+                      });
+                    },
                   ),
                   const SizedBox(height: 20),
                   SizedBox(
@@ -222,48 +197,4 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
-  Widget _buildDropdown({
-    required String label,
-    required String value,
-    required List<String> items,
-    required ValueChanged<String?> onChanged,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        const SizedBox(height: 8),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey.shade300),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: DropdownButton<String>(
-              value: value,
-              isExpanded: true,
-              underline: const SizedBox.shrink(),
-              icon: const Icon(Icons.keyboard_arrow_down),
-              onChanged: onChanged,
-              items: items
-                  .map(
-                    (option) => DropdownMenuItem<String>(
-                      value: option,
-                      child: Text(option),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }
